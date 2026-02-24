@@ -1,13 +1,29 @@
 import {test, expect} from '@playwright/test';  
+import { assert } from 'console';
 
-test('get by label practice - inside forms', async ({page}) => {
+test('Fill actions', async ({page}) => {
     await page.goto('FeedBackForm.html');
 
-    const name = page.getByLabel('name');
-    await name.fill('Gustavo');
+    const nameField = page.getByRole('textbox', {
+        name: 'name'
+    });
+    await nameField.fill('Gustavo');
 
-    const email = page.getByLabel('email');
-    await email.fill('pelayo@gmail.com');
 
 });
+test('Key actions', async ({page}) => {
+    await page.goto('FeedBackForm.html');
+
+    const nameField = page.getByRole('textbox', {
+        name: 'name'
+    });
+    await nameField.fill('Gustavo');
+
+    await nameField.press('P'); 
+
+
+    await expect(nameField).toHaveValue('GustavoP');
+
+});
+    
     
