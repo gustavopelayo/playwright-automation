@@ -13,6 +13,9 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+  reporter: 'html',
+  fullyParallel: true,
+  workers: '75%',
   webServer: {
     command: 'npm run start',
     url: 'http://localhost:5001',
@@ -20,7 +23,8 @@ export default defineConfig({
   },
   use: {
     baseURL: 'http://localhost:5001',
-    headless: false
+    headless: false,
+    locale: 'en-GB',
   },
 
 
@@ -34,25 +38,8 @@ export default defineConfig({
     {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
-
-
-    /* Test against branded browsers. */
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    },
-  ],
+    }
+  ]
 
   /* Run your local dev server before starting the tests */
   // webServer: {
